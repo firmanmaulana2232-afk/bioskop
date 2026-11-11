@@ -111,8 +111,15 @@ input[type=text],input:not([type]),input[type=number],input[type=url]{width:100%
 <div class="pane" id="pK" hidden>
 <div id="sell">
   <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
-    <input id="seller" placeholder="Nama stand / penjual (mis. Stand 1 - Budi)">
-    <input id="buyer" placeholder="Nama pembeli / no meja (mis. Siti / Rian - 01)">
+    <select id="sellerSelect" style="width:100%;padding:12px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit">
+      <option value="Stand Lapangan">🍿 Stand Lapangan (Utama)</option>
+      <option value="Stand 1">🏪 Stand 1</option>
+      <option value="Stand 2">🏪 Stand 2</option>
+      <option value="Stand 3">🏪 Stand 3</option>
+      <option value="custom">✏️ Nama Stand Lainnya...</option>
+    </select>
+    <input id="seller" placeholder="Ketik nama stand kamu" style="display:none">
+    <input id="buyer" placeholder="Nama / No. Pembeli (Opsional, misal: Pembeli #1)">
   </div>
   <div class="mg" id="menu"></div>
   <label class="ed"><input type="checkbox" id="edit" style="width:auto"> ✏️ Ubah harga makanan</label>
@@ -462,15 +469,35 @@ $("menu").onchange=e=>{
 };
 
 $("edit").onchange=renderMenu;
-$("seller").value=ls("seller","");
+const initSeller=ls("seller","Stand Lapangan");
+$("seller").value=initSeller;
+if(["Stand Lapangan","Stand 1","Stand 2","Stand 3"].includes(initSeller)){
+  $("sellerSelect").value=initSeller;
+  $("seller").style.display="none";
+}else{
+  $("sellerSelect").value="custom";
+  $("seller").style.display="block";
+}
+
+$("sellerSelect").onchange=e=>{
+  if(e.target.value==="custom"){
+    $("seller").style.display="block";
+    $("seller").focus();
+  }else{
+    $("seller").style.display="none";
+    $("seller").value=e.target.value;
+    lset("seller",e.target.value);
+  }
+};
 $("seller").oninput=e=>lset("seller",e.target.value);
 
 $("confirm").onclick=async()=>{
   const{t,n}=calc();
-  const seller=$("seller").value.trim();
-  const buyer=$("buyer").value.trim()||"Pembeli Umum";
+  const rawSeller=$("sellerSelect").value==="custom"?$("seller").value.trim():$("sellerSelect").value;
+  const seller=rawSeller||"Stand Lapangan";
+  const nextNum=Object.keys(sales).length+1;
+  const buyer=$("buyer").value.trim()||("Pembeli #"+nextNum);
 
-  if(!seller) return alert("Wajib isi nama stand / penjual dulu.");
   if(!t) return alert("Pilih minimal 1 menu makanan.");
   if(n<1) return alert("Belanja belum mencapai syarat tiket bonus (minimal belanja "+rp(MINV)+" dapat 1 tiket).");
 
