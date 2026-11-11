@@ -59,13 +59,13 @@ input[type=text],input:not([type]),input[type=number],input[type=url]{width:100%
 .ok{color:var(--ok);font-weight:700}.bad{color:var(--ac);font-weight:700}
 .ed{display:block;margin:4px 0;font-size:14px;color:var(--mut)}
 .alt{background:var(--card);color:var(--tx);border:1px solid var(--bd)}
-.sp{position:fixed;inset:0;z-index:20;background:radial-gradient(circle at 50% 35%,#5a0a0d 0%,#1a0305 75%,#0d0102 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;padding-top:max(16px,env(safe-area-inset-top,16px));padding-bottom:max(16px,env(safe-area-inset-bottom,16px));transition:opacity .5s;overflow-y:auto;box-sizing:border-box}
+.sp{position:fixed;inset:0;z-index:20;background:radial-gradient(circle at 50% 35%,#4a080b 0%,#180305 75%,#0a0102 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;padding-top:max(16px,env(safe-area-inset-top,16px));padding-bottom:max(16px,env(safe-area-inset-bottom,16px));transition:opacity .5s;overflow-y:auto;box-sizing:border-box}
 .sp.out{opacity:0;pointer-events:none}
 .sp[hidden]{display:none}
-.spw{position:relative;container-type:inline-size;width:100%;max-width:680px;max-height:55vh;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px #f5b94244,0 0 0 2px #f5b94288;background:#1e0507;display:flex;align-items:center;justify-content:center}
-.spw img{width:100%;height:100%;object-fit:contain;display:block}
-.tg{position:absolute;left:50%;top:18.5%;transform:translate(-50%,-50%);font:700 3.3cqw Georgia,"Times New Roman",serif;letter-spacing:.15em;color:#fbe3a5;white-space:nowrap;text-shadow:0 2px 8px #000,0 0 16px #f5b942;pointer-events:none}
-.go{border:0;background:linear-gradient(#ffd166,#f5a623);color:#3a0d00;font:800 18px system-ui;padding:14px 30px;border-radius:99px;box-shadow:0 0 22px #f5b942aa;animation:glow 1.8s infinite;cursor:pointer;flex-shrink:0}
+.spttl{font-size:22px;font-weight:800;letter-spacing:3px;color:#fbe3a5;text-shadow:0 2px 10px #000,0 0 20px #f5b942aa;text-transform:uppercase;margin:0;text-align:center}
+.spw{position:relative;width:100%;max-width:680px;max-height:54vh;aspect-ratio:736/435;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px #f5b94233,0 0 0 2px #f5b94277;background:#140809;display:flex;align-items:center;justify-content:center}
+.spw img{width:100%;height:100%;object-fit:cover;display:block}
+.go{border:0;background:linear-gradient(#ffd166,#f5a623);color:#3a0d00;font:800 18px system-ui;padding:14px 32px;border-radius:99px;box-shadow:0 0 22px #f5b942aa;animation:glow 1.8s infinite;cursor:pointer;flex-shrink:0}
 .sp small{color:#e8c9a0;text-align:center;font-size:13px;flex-shrink:0}
 .badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700}
 .badge.ok{background:#58d17f22;color:var(--ok);border:1px solid var(--ok)}
@@ -75,9 +75,10 @@ input[type=text],input:not([type]),input[type=number],input[type=url]{width:100%
 </head>
 <body>
 <div class="sp" id="sp">
-<div class="spw"><img src="assets/splash.jpg" alt="Cinema Movie"><div class="tg">Selamat Datang</div></div>
-<button class="go" id="go">🎟️ Masuk Bioskop</button>
-<small>Beli makanan di stand, dapat tiket nonton bioskop!</small>
+  <h2 class="spttl">🎬 SELAMAT DATANG</h2>
+  <div class="spw"><img src="assets/splash.jpg" alt="Cinema Theatre"></div>
+  <button class="go" id="go">🎟️ Masuk Bioskop</button>
+  <small>Beli makanan di stand, dapat tiket nonton bioskop!</small>
 </div>
 
 <div class="wrap">
@@ -201,7 +202,7 @@ const IMG={
 };
 
 /* ===== POSISI AREA KLIK DI GAMBAR LOBI ===== */
-const HS={"kasir": [-0.3, 0.25, 29.24, 73.03], "pintu": [63.42, 16.03, 13.49, 59.8]};
+const HS={"kasir": [0, 0, 29, 75], "pintu": [63.5, 15, 14, 61]};
 
 /* ===== MENU & HARGA STAND ===== */
 const MENU=[
