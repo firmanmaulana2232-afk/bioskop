@@ -1,0 +1,11 @@
+DAFTAR MENU DAN HARGA
+(Harga perkiraan pasaran. Kalau diubah, samakan di web: centang "Ubah harga" di panel kasir,
+atau ubah di index.html bagian "const MENU=")
+
+Tahu Crispy          Rp8.000
+Pempek Palembang     Rp15.000
+Siomay Bandung       Rp12.000
+Kentang Goreng       Rp10.000
+Takoyaki             Rp12.000
+Pangsit Chili Oil    Rp12.000
+Dimsum Kukus         Rp10.000

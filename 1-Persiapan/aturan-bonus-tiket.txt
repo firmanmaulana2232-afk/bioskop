@@ -1,0 +1,8 @@
+ATURAN BONUS TIKET NONTON
+
+1. Setiap kelipatan belanja Rp15.000 mendapat 1 tiket nonton.
+   Contoh: belanja Rp30.000 = 2 tiket, belanja Rp14.000 = belum dapat tiket.
+2. Maksimal 9 tiket per transaksi.
+3. Tiket berupa kode 6 karakter dari penjual.
+4. 1 kode bisa dipakai beberapa orang sampai jumlah tiketnya habis.
+5. Kode yang sudah habis dipakai tidak bisa dipakai lagi.

@@ -1,0 +1,16 @@
+KODE WEB KASIR & BIOSKOP
+
+ISI FOLDER:
+  bioskop.html          -> file utama aplikasi web (bisa dibuka langsung)
+  index.html            -> salinan utama untuk hosting web
+  google-apps-script.js -> script database untuk Google Spreadsheet
+  assets/               -> gambar pembuka (splash.jpg), lobi (lobi.jpg), foto makanan (*.webp)
+
+CARA MEMBUKA:
+  Klik dua kali "bioskop.html" (atau "index.html") di Chrome/Edge/browser.
+  Atau gunakan file "Buka-Bioskop.bat".
+
+SINKRONISASI DUA ARAH (LAPANGAN & KELAS):
+  Web ini sudah terintegrasi dengan Google Spreadsheet melalui Google Apps Script.
+  Buka panduan lengkapnya di file:
+  "2-Aplikasi/PANDUAN_SETUP_SPREADSHEET.md"

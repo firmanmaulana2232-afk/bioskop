@@ -1,0 +1,18 @@
+PANDUAN PENGGUNAAN
+
+PENJAGA STAND (tab Penjual)
+1. Isi nama stand sekali saja.
+2. Pilih menu yang dibeli pembeli dengan tombol + dan -.
+3. Klik "Konfirmasi Pembelian".
+4. Kasih kode tiket 6 karakter yang muncul ke pembeli.
+5. Klik "Pembelian baru" untuk pembeli berikutnya.
+
+PENJAGA BIOSKOP (tab Pintu Bioskop)
+1. Minta kode tiket dari penonton, lalu ketik di kolom kode.
+2. Klik "Cek Tiket".
+3. Kalau valid, atur jumlah orang yang masuk, lalu klik "Konfirmasi Masuk".
+4. Kalau muncul tanda merah, tiket tidak valid atau sudah habis dipakai.
+
+REKAP (tab Rekap)
+- Menampilkan jumlah transaksi, omzet, tiket dibagikan, dan penonton masuk.
+- Tombol "Unduh data" menyimpan semua data sebagai CSV.

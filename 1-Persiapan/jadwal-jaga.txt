@@ -1,0 +1,5 @@
+JADWAL JAGA (salin ke Excel/Sheets sebagai jadwal-jaga.xlsx)
+
+Jam           | Penjaga Stand | Penjaga Bioskop
+------------- | ------------- | ---------------
+...           | ...           | ...

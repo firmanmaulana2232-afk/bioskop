@@ -1,0 +1,36 @@
+=====================================================================
+LINK SISTEM KASIR & PENJAGA BIOSKOP
+=====================================================================
+
+1. CARA BUKA DI KOMPUTER / LAPTOP:
+   - Klik dua kali file "Buka-Bioskop.bat" di folder utama atau di folder ini.
+   - Atau buka langsung file "bioskop.html".
+
+2. CARA BUKA DI HP (STAND LAPANGAN & PINTU KELAS):
+   Supaya link online bernama "bioskop" dan bisa dibuka bersamaan dari HP:
+
+   Opsi A: Upload Gratis ke Netlify (Paling Cepat 1 Menit)
+   1. Buka browser: https://app.netlify.com/drop
+   2. Seret (drag & drop) folder "2-Aplikasi/kode-web" ke halaman tersebut.
+   3. Setelah jadi, klik "Site settings" > "Change site name".
+   4. Ubah nama situs menjadi misalnya: "bioskop-kelas" (atau sesuai keinginan).
+   5. Link online Anda akan menjadi:
+      https://bioskop-[nama-pilihan].netlify.app
+
+   Opsi B: Menggunakan GitHub Pages
+   1. Buat repositori baru di GitHub dengan nama: "bioskop"
+   2. Upload seluruh file di dalam folder "kode-web" ke repo tersebut.
+   3. Buka Settings > Pages > pilih Branch "main" > Save.
+   4. Link online Anda akan menjadi:
+      https://[username-anda].github.io/bioskop
+
+   Opsi C: 1 Wi-Fi / Hotspot yang Sama (Tanpa Hosting)
+   - Sambungkan HP stand & HP kelas ke Hotspot Wi-Fi laptop.
+   - Jalankan live server di laptop, buka: http://[IP-Laptop]:5500/bioskop.html
+
+=====================================================================
+FITUR & PEMBAGIAN TUGAS:
+- Kasir Stand Makanan (Lapangan) : Input menu & nama pembeli -> dapat kode tiket 6 karakter.
+- Penjaga Bioskop (Di Kelas)     : Validasi kode tiket -> konfirmasi masuk penonton.
+- Rekapitulasi Real-Time         : Live data pembeli, omzet, dan tiket terpakai di Google Sheets.
+=====================================================================

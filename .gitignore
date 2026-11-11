@@ -1,0 +1,9 @@
+# Dependencies & build
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Environment & Temp
+powershell.bat
+*.tmp
+*.log
