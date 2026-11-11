@@ -110,16 +110,9 @@ input[type=text],input:not([type]),input[type=number],input[type=url]{width:100%
 <!-- PANE 1: KASIR STAND MAKANAN (LAPANGAN) -->
 <div class="pane" id="pK" hidden>
 <div id="sell">
-  <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px">
-    <select id="sellerSelect" style="width:100%;padding:12px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit">
-      <option value="Stand Lapangan">🍿 Stand Lapangan (Utama)</option>
-      <option value="Stand 1">🏪 Stand 1</option>
-      <option value="Stand 2">🏪 Stand 2</option>
-      <option value="Stand 3">🏪 Stand 3</option>
-      <option value="custom">✏️ Nama Stand Lainnya...</option>
-    </select>
-    <input id="seller" placeholder="Ketik nama stand kamu" style="display:none">
-    <input id="buyer" placeholder="Nama / No. Pembeli (Opsional, misal: Pembeli #1)">
+  <div style="margin-bottom:8px">
+    <label class="mut" style="display:block;margin-bottom:4px;font-size:13px">Nama Pembeli:</label>
+    <input id="buyer" placeholder="Ketik nama pembeli (mis. Rian / Meja 3)" style="font-size:15px;font-weight:600">
   </div>
   <div class="mg" id="menu"></div>
   <label class="ed"><input type="checkbox" id="edit" style="width:auto"> ✏️ Ubah harga makanan</label>
@@ -133,8 +126,11 @@ input[type=text],input:not([type]),input[type=number],input[type=url]{width:100%
 <div id="result" hidden>
   <div class="mut" style="text-align:center">Kode tiket dibuat! Berikan ke pembeli:</div>
   <div class="code" id="rcode"></div>
-  <div style="text-align:center;font-size:15px;margin-bottom:10px">
+  <div style="text-align:center;font-size:15px;margin-bottom:4px">
     Pembeli: <b id="rbuyer"></b> · Kuota: <b id="rn"></b> orang
+  </div>
+  <div style="text-align:center;font-size:13px;color:var(--mut);margin-bottom:12px">
+    Tenant: <span id="rseller" style="color:var(--gold);font-weight:700"></span>
   </div>
   <button class="btn alt" id="copybtn" style="width:100%;margin-bottom:6px">📋 Salin Kode Tiket</button>
   <button class="btn big" id="newbtn">Pembelian Baru</button>
@@ -215,13 +211,13 @@ const HS={"kasir": [4.5, 30.6, 10.8, 41.5], "pintu": [64.1, 28.3, 9.1, 46.5]};
 
 /* ===== MENU & HARGA STAND ===== */
 const MENU=[
-  {k:"tahu",n:"Tahu Crispy",p:8000},
-  {k:"pempek",n:"Pempek Palembang",p:15000},
-  {k:"siomay",n:"Siomay Bandung",p:12000},
-  {k:"kentang",n:"Kentang Goreng",p:10000},
-  {k:"takoyaki",n:"Takoyaki",p:12000},
-  {k:"pangsit",n:"Pangsit Chili Oil",p:12000},
-  {k:"dimsum",n:"Dimsum Kukus",p:10000}
+  {k:"tahu",n:"Tahu Crispy",p:8000,s:"Stand Tahu"},
+  {k:"pempek",n:"Pempek Palembang",p:15000,s:"Stand Pempek"},
+  {k:"siomay",n:"Siomay Bandung",p:12000,s:"Stand Siomay"},
+  {k:"kentang",n:"Kentang Goreng",p:10000,s:"Stand Kentang"},
+  {k:"takoyaki",n:"Takoyaki",p:12000,s:"Stand Takoyaki"},
+  {k:"pangsit",n:"Pangsit Chili Oil",p:12000,s:"Stand Pangsit"},
+  {k:"dimsum",n:"Dimsum Kukus",p:10000,s:"Stand Dimsum"}
 ];
 
 const MINV=15000;
@@ -429,7 +425,8 @@ function renderMenu(){
   $("menu").innerHTML=MENU.map(m=>`
     <div class="mi">
       <div class="pic"><img src="${IMG[m.k]}" alt="${m.n}"></div>
-      <b>${m.n}</b>
+      <b style="font-size:14px;line-height:1.2">${m.n}</b>
+      <small style="font-size:11px;color:var(--gold);font-weight:600">🏪 ${m.s}</small>
       ${ed?`<input class="pin" type="number" inputmode="numeric" data-k="${m.k}" value="${price(m)}">`:`<span class="pr">${rp(price(m))}</span>`}
       <div class="q">
         <button data-k="${m.k}" data-d="-1">−</button>
@@ -469,37 +466,20 @@ $("menu").onchange=e=>{
 };
 
 $("edit").onchange=renderMenu;
-const initSeller=ls("seller","Stand Lapangan");
-$("seller").value=initSeller;
-if(["Stand Lapangan","Stand 1","Stand 2","Stand 3"].includes(initSeller)){
-  $("sellerSelect").value=initSeller;
-  $("seller").style.display="none";
-}else{
-  $("sellerSelect").value="custom";
-  $("seller").style.display="block";
-}
-
-$("sellerSelect").onchange=e=>{
-  if(e.target.value==="custom"){
-    $("seller").style.display="block";
-    $("seller").focus();
-  }else{
-    $("seller").style.display="none";
-    $("seller").value=e.target.value;
-    lset("seller",e.target.value);
-  }
-};
-$("seller").oninput=e=>lset("seller",e.target.value);
 
 $("confirm").onclick=async()=>{
   const{t,n}=calc();
-  const rawSeller=$("sellerSelect").value==="custom"?$("seller").value.trim():$("sellerSelect").value;
-  const seller=rawSeller||"Stand Lapangan";
+  const selected=MENU.filter(m=>(cart[m.k]||0)>0);
+
+  if(!t||selected.length===0) return alert("Pilih minimal 1 menu makanan yang dibeli.");
+  if(n<1) return alert("Belanja belum mencapai syarat tiket bonus (minimal belanja "+rp(MINV)+" dapat 1 tiket).");
+
+  // Otomatis deteksi tenant/stand dari menu makanan yang dipilih!
+  const tenants=[...new Set(selected.map(m=>m.s||("Stand "+m.n)))];
+  const seller=tenants.join(", ");
+
   const nextNum=Object.keys(sales).length+1;
   const buyer=$("buyer").value.trim()||("Pembeli #"+nextNum);
-
-  if(!t) return alert("Pilih minimal 1 menu makanan.");
-  if(n<1) return alert("Belanja belum mencapai syarat tiket bonus (minimal belanja "+rp(MINV)+" dapat 1 tiket).");
 
   const btn=$("confirm");
   btn.disabled=true;
@@ -508,7 +488,7 @@ $("confirm").onclick=async()=>{
   let code;
   do{code=mkCode(n)}while(sales[code]);
 
-  const items=MENU.filter(m=>cart[m.k]).map(m=>cart[m.k]+"x "+m.n).join(", ");
+  const items=selected.map(m=>(cart[m.k]||1)+"x "+m.n).join(", ");
   const newSale={
     code,
     buyer,
@@ -528,6 +508,7 @@ $("confirm").onclick=async()=>{
 
   $("rcode").textContent=code;
   $("rbuyer").textContent=buyer;
+  $("rseller").textContent=seller;
   $("rn").textContent=n;
   $("sell").hidden=true;
   $("result").hidden=false;
