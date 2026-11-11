@@ -21,9 +21,11 @@ h1{font-size:20px;margin:0;flex:1}
 .pill.err{color:#ff6b5f;border-color:#ff6b5f;background:#ff6b5f1a}
 .scene{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 0 30px #b3261e55}
 .scene img{display:block;width:100%;height:auto}
-.hs{position:absolute;border:2px solid var(--gold);background:#f5b94222;border-radius:8px;cursor:pointer;padding:0;animation:glow 1.8s infinite}
-.hs span{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);white-space:nowrap;background:var(--gold);color:#2b1700;font:700 12px system-ui;padding:4px 9px;border-radius:99px}
-@keyframes glow{0%,100%{box-shadow:0 0 6px #f5b94277}50%{box-shadow:0 0 22px #f5b942}}
+.hs{position:absolute;border:2px solid rgba(245,185,66,0.75);background:transparent;border-radius:6px;cursor:pointer;padding:0;transition:all .25s ease;animation:glowBox 2.2s infinite ease-in-out}
+.hs:hover{border-color:#ffd166;background:rgba(245,185,66,0.12);box-shadow:0 0 25px rgba(245,185,66,0.8),inset 0 0 15px rgba(245,185,66,0.25);transform:scale(1.02)}
+.hs span{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);white-space:nowrap;background:linear-gradient(135deg,#ffd166,#f5a623);color:#2b1100;font:800 12px system-ui,-apple-system,sans-serif;padding:5px 12px;border-radius:99px;box-shadow:0 3px 12px rgba(0,0,0,0.7),0 0 10px rgba(245,185,66,0.6);letter-spacing:.3px;pointer-events:none;transition:all .25s ease}
+.hs:hover span{transform:translateX(-50%) scale(1.08);box-shadow:0 4px 16px rgba(0,0,0,0.8),0 0 18px rgba(245,185,66,0.95);background:linear-gradient(135deg,#fff275,#ffb703)}
+@keyframes glowBox{0%,100%{box-shadow:0 0 4px rgba(245,185,66,0.3)}50%{box-shadow:0 0 16px rgba(245,185,66,0.75)}}
 .hint{text-align:center;color:#cbbba8;font-size:13px;margin:8px 0}
 .quick{display:flex;gap:8px}
 .quick button,.tool{flex:1;padding:12px;border:1px solid #6a4a3c;background:#2a1612;color:#fff;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
@@ -202,7 +204,7 @@ const IMG={
 };
 
 /* ===== POSISI AREA KLIK DI GAMBAR LOBI ===== */
-const HS={"kasir": [0, 0, 29, 75], "pintu": [63.5, 15, 14, 61]};
+const HS={"kasir": [4.5, 30.6, 10.8, 41.5], "pintu": [64.1, 28.3, 9.1, 46.5]};
 
 /* ===== MENU & HARGA STAND ===== */
 const MENU=[
